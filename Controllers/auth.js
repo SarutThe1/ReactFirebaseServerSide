@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).send("Password Invalid!!");
+        return res.status(400).send("Password is not match");
       }
 
       // Payload
@@ -87,7 +87,7 @@ exports.login = async (req, res) => {
         res.json({ token, payload });
       });
     } else {
-      return res.status(400).send("User Not found!!!");
+      return res.status(400).send("User not found!!!");
     }
   } catch (err) {
     console.log(err);
