@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+
 require('dotenv').config();
 
 const {readdirSync} = require('fs')
@@ -24,6 +25,8 @@ app.use(cors())
 
 //Routes
 readdirSync('./Routes').map((r)=> app.use('/api',require("./Routes/"+r)))
+
+
 
 
 //Runserver
