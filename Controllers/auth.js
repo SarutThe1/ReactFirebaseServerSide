@@ -1,4 +1,4 @@
-const User = require("../Models/Users");
+const User = require("../Models/GoogleUsers");
 const Nuser = require("../Models/NormUser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -94,6 +94,18 @@ exports.login = async (req, res) => {
     res.status(500).send("Server Error!");
   }
 };
+
+exports.currentNormUser = async (req, res) => {
+  try {
+    const user = await  Nuser.findOne({email: req.user.email})
+    .select('-password').exec();
+    res.send(user)
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error!");
+  }
+};
+
 
 exports.listUser = async (req, res) => {
   try {
