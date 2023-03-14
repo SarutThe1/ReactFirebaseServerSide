@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const Nuser = require('../Models/NormUser')
+const User = require('../Models/NormUser')
 
 exports.auth = (req,res,next) => {
     try{
@@ -22,7 +22,7 @@ exports.adminCheck = async (req,res,next) => {
     try{
        
         const {email} = req.user
-        const adminUser = await Nuser.findOne({ email }).exec()
+        const adminUser = await User.findOne({ email }).exec()
         if(adminUser.role !== "admin"){
             res.status(403).send(err,'Admin Access Denied')
         }else{

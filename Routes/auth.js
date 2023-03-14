@@ -1,18 +1,23 @@
 const express = require("express");
 const router = express.Router();
-//controllers
-const {createAndUpdateUser,currentUser} = require('../Controllers/auth')
 
-//Middleware
-const {authCheck} = require('../Middleware/authCheck')
+//controller
+const {register,login,currentNormUser,listUser,editUser,deleteUser} = require('../Controllers/auth')
+
+//middleware
+const {auth,adminCheck} = require('../Middleware/auth')
 
 /*
-Endpoint http://localhost:5000/api/auth 
-access
-Method POST
+Endpoint http://localhost:5000/api/
 */
-router.post("/auth",authCheck , createAndUpdateUser);
-router.post("/current-user",authCheck , currentUser);
+router.post('/register',register)
+
+router.post('/login',login)
+
+router.post('/current-normuser',auth,currentNormUser)
+
+router.post('/current-admin',auth,adminCheck,currentNormUser)
+
 
 
 module.exports = router;

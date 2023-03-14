@@ -1,12 +1,12 @@
-const User = require("../Models/GoogleUsers");
-const Nuser = require("../Models/NormUser");
+const ggUser = require("../Models/GoogleUsers");
+const User = require("../Models/NormUser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.createAndUpdateUser = async (req, res) => {
   const { name, email } = req.user;
 
-  const user = await User.findOneAndUpdate({ email }, { name }, { new: true });
+  const user = await ggUser.findOneAndUpdate({ email }, { name }, { new: true });
   if (user) {
     res.json(user);
   } else {
@@ -20,7 +20,7 @@ exports.createAndUpdateUser = async (req, res) => {
 
 exports.currentUser = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.user.email }).exec();
+    const user = await ggUser.findOne({ email: req.user.email }).exec();
     res.send(user);
   } catch (err) {
     console.log(err);
@@ -33,13 +33,13 @@ exports.register = async (req, res) => {
     //check user
     const { username, password, email, telephone, firstname, lastname } =
       req.body;
-    var user = await Nuser.findOne({ email });
+    var user = await User.findOne({ email });
     if (user) {
       return res.status(400).send("This user already exists");
     }
 
     const salt = await bcrypt.genSalt(10);
-    user = new Nuser({
+    user = new User({
       email,
       password,
       username,
@@ -60,7 +60,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    var user = await Nuser.findOneAndUpdate({ email }, { new: true });
+    var user = await User.findOneAndUpdate({ email }, { new: true });
     if (user) {
       //Check password
       const isMatch = await bcrypt.compare(password, user.password);
@@ -97,37 +97,9 @@ exports.login = async (req, res) => {
 
 exports.currentNormUser = async (req, res) => {
   try {
-    const user = await  Nuser.findOne({email: req.user.email})
+    const user = await  User.findOne({email: req.user.email})
     .select('-password').exec();
     res.send(user)
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Server Error!");
-  }
-};
-
-
-exports.listUser = async (req, res) => {
-  try {
-    res.send("list Get user");
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Server Error!");
-  }
-};
-
-exports.editUser = async (req, res) => {
-  try {
-    res.send("Edit user");
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Server Error!");
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    res.send("Delete user");
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");
