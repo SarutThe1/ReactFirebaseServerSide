@@ -9,10 +9,30 @@ const userSchema = mongoose.Schema({
         type: String,
         require:true
     },
-    phoneNumber:String,
+    firstname:{
+        type: String
+    },
+    lastname:{
+        type: String
+    },
+    telephone:{
+        type: String
+    },
+    gender:{
+        type: String,
+    },
+    birthday:{
+        type: Date,
+    },
+    address:{
+        type: String
+    },
     role:{
-        type:String,
+        type: String,
         default:'user'
+    },
+    picture:{
+        type: String
     }
 
 },{timestamps:true})

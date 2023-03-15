@@ -35,7 +35,7 @@ const NuserSchema = mongoose.Schema({
         type: String,
         default:'user'
     },
-    images:{
+    picture:{
         type: Array
     }
     

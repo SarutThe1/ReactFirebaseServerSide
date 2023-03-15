@@ -4,15 +4,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.createAndUpdateUser = async (req, res) => {
-  const { name, email } = req.user;
+  const { name, email , picture} = req.user;
 
-  const user = await ggUser.findOneAndUpdate({ email }, { name }, { new: true });
+  const user = await ggUser.findOneAndUpdate({ email }, { name }, {picture}, { new: true });
   if (user) {
     res.json(user);
   } else {
-    const newUser = await User({
+    const newUser = await ggUser({
       email,
       name,
+      picture
     }).save();
     res.json(newUser);
   }
