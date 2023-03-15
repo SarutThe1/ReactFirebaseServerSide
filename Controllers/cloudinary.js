@@ -1,9 +1,10 @@
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 
+// Configuration 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: "dcivyfvvk",
+  api_key: "113881885556649",
+  api_secret: "Ah9tciGjEATBWU-1kGSUUcpCiTs"
 });
 
 exports.createImage = async (req, res) => {
