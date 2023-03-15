@@ -4,24 +4,26 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.createAndUpdateUser = async (req, res) => {
-  const { name, email , picture} = req.user;
+  const { email , name, picture} = req.user;
 
-  const user = await ggUser.findOneAndUpdate({ email }, { name }, {picture}, { new: true });
+  const user = await User.findOneAndUpdate({ email }, { name }, {picture}, { new: true });
   if (user) {
+    /* console.log('USER UPDATED: ', user) */
     res.json(user);
   } else {
-    const newUser = await ggUser({
+    const newUser = await User({
       email,
       name,
       picture
     }).save();
+    /* console.log('USER CREATED: ', newUser) */
     res.json(newUser);
   }
 };
 
 exports.currentUser = async (req, res) => {
   try {
-    const user = await ggUser.findOne({ email: req.user.email }).exec();
+    const user = await User.findOne({ email: req.user.email }).exec();
     res.send(user);
   } catch (err) {
     console.log(err);
@@ -32,7 +34,7 @@ exports.currentUser = async (req, res) => {
 exports.register = async (req, res) => {
   try {
     //check user
-    const { username, password, email, telephone, firstname, lastname } =
+    const { name, password, email, telephone, firstname, lastname } =
       req.body;
     var user = await User.findOne({ email });
     if (user) {
@@ -43,7 +45,7 @@ exports.register = async (req, res) => {
     user = new User({
       email,
       password,
-      username,
+      name,
       telephone,
       firstname,
       lastname,
@@ -75,7 +77,7 @@ exports.login = async (req, res) => {
         user: {
           _id: user._id,
           email: user.email,
-          username: user.username,
+          name: user.name,
           firstname: user.firstname,
           lastname: user.lastname,
           telephone: user.telephone,

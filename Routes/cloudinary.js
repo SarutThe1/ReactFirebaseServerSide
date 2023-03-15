@@ -3,8 +3,11 @@ const router = express.Router();
 
 const{createImage,removeImage} = require('../Controllers/cloudinary')
 
-router.post("/images", createImage);
-router.post('removeimages', removeImage)
+//middleware
+const {auth} = require('../Middleware/auth')
+
+router.post("/images",auth, createImage);
+router.post('removeimages',auth, removeImage)
 
 
 module.exports = router;

@@ -9,7 +9,7 @@ const NuserSchema = mongoose.Schema({
     password:{
         type: String
     },
-    username:{
+    name:{
         type: String,
         require:true
     },
@@ -36,7 +36,7 @@ const NuserSchema = mongoose.Schema({
         default:'user'
     },
     picture:{
-        type: Array
+        type: String
     }
     
 
