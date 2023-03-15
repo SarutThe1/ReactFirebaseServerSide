@@ -22,9 +22,21 @@ const NuserSchema = mongoose.Schema({
     telephone:{
         type: String
     },
+    gender:{
+        type: String,
+    },
+    birthday:{
+        type: Date,
+    },
+    address:{
+        type: String
+    },
     role:{
         type: String,
         default:'user'
+    },
+    images:{
+        type: Array
     }
     
 
