@@ -36,7 +36,7 @@ const NuserSchema = mongoose.Schema({
         default:'user'
     },
     picture:{
-        type: String
+        type: Array
     }
     
 
