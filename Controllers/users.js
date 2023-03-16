@@ -27,7 +27,18 @@ exports.readUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    res.send("Update user");
+    const user = await User.findOneAndUpdate(
+      { _id: req.params.id },req.body,
+
+      /* { email : req.body.email },
+      { name : req.body.name },
+      { firstname: req.body.firstname },
+      { lastname: req.body.lastname },
+      { telephone: req.body.telephone },
+      { picture : req.body.picture}, */
+
+      {new:true}).exec()
+    res.send(user)
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");
