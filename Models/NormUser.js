@@ -14,22 +14,26 @@ const NuserSchema = mongoose.Schema({
         require:true
     },
     firstname:{
-        type: String
+        type: String,
+        default:''
     },
     lastname:{
-        type: String
+        type: String,
+        default:''
     },
     telephone:{
-        type: String
+        type: String,
+        default:''
     },
     gender:{
         type: String,
+        default:''
     },
     birthday:{
         type: Date,
     },
     address:{
-        type: String
+        type: Array,
     },
     role:{
         type: String,

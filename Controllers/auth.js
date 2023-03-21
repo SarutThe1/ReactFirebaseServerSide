@@ -4,9 +4,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.createAndUpdateUser = async (req, res) => {
-  const { email , name, picture} = req.user;
+  const { email , name, picture, telephone, firstname, lastname} = req.user;
 
-  const user = await User.findOneAndUpdate({ email }, { name }, {picture}, { new: true });
+  const user = await User.findOneAndUpdate({ email }, {picture}, { new: true });
   if (user) {
     /* console.log('USER UPDATED: ', user) */
     res.json(user);
@@ -14,7 +14,10 @@ exports.createAndUpdateUser = async (req, res) => {
     const newUser = await User({
       email,
       name,
-      picture
+      picture,
+      telephone,
+      firstname,
+      lastname,
     }).save();
     /* console.log('USER CREATED: ', newUser) */
     res.json(newUser);
