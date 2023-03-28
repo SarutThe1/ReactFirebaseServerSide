@@ -1,4 +1,4 @@
-const ggUser = require("../Models/GoogleUsers");
+
 const User = require("../Models/NormUser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
