@@ -21,3 +21,12 @@ exports.createPet = async (req, res) => {
         res.status(500).send("Create my pets ERROR!!!" + err)
     }
 }
+
+exports.listPet = async (req,res) => {
+    try {
+        const mypets = await Pets.find().sort([['createdAt','asc']]) 
+        res.send(mypets)
+    }catch(err){
+        res.status(500).send("List pets ERROR!!!" + err)
+    }
+}

@@ -2,9 +2,12 @@ const express = require('express')
 const router = express.Router()
 
 const {
-    createPet
+    createPet,
+    listPet,
 } = require('../Controllers/mypets')
 
 router.post('/pet', createPet)
+
+router.get('/pet', listPet)
 
 module.exports = router
