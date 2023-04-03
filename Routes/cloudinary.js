@@ -6,8 +6,8 @@ const{createImage,removeImage} = require('../Controllers/cloudinary')
 //middleware
 const {auth} = require('../Middleware/auth')
 
-router.post("/images",auth, createImage);
-router.post('/removeimages',auth, removeImage)
+router.post("/images", createImage);
+router.post('/removeimages', removeImage)
 
 
 module.exports = router;

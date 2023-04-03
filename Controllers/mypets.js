@@ -30,3 +30,32 @@ exports.listPet = async (req,res) => {
         res.status(500).send("List pets ERROR!!!" + err)
     }
 }
+
+//Show only my pet
+const handleOwner = async (req, res, email) => {
+    let mypets = await Pets.find({  email  })
+    .sort([["createdAt", "asc"]])
+    res.send(mypets)
+}
+
+exports.searchFilters = async (req, res) => {
+    const {
+        email
+    } = req.body
+
+    if (email) {
+        await handleOwner(req, res, email)
+    }
+}
+
+//delete
+exports.deletePet = async(req,res)=>{
+    try{
+        const deleted = await Pets.findOneAndRemove({_id:req.params.id})
+        .exec()
+
+        res.send(deleted)
+    }catch(err){
+        res.status(500).send("Delete pets ERROR!!!" + err)
+    }
+}
