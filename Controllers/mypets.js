@@ -48,6 +48,7 @@ exports.searchFilters = async (req, res) => {
     }
 }
 
+
 //delete
 exports.deletePet = async(req,res)=>{
     try{
@@ -59,3 +60,27 @@ exports.deletePet = async(req,res)=>{
         res.status(500).send("Delete pets ERROR!!!" + err)
     }
 }
+
+exports.readPet = async(req,res) => {
+    try{
+        const mypets = await Pets
+        .findOne({_id:req.params.id})
+        .exec()
+        res.send(mypets)
+    }catch(err){
+        res.status(500).send("Server Error!");
+    }
+}
+
+//update
+exports.updatePet = async (req, res) => {
+    try {
+      const mypets = await Pets.findOneAndUpdate(
+        { _id: req.params.id },req.body,
+  
+        {new:true}).exec()
+      res.send(mypets)
+    } catch (err) {
+      res.status(500).send("Server Error!");
+    }
+  };
