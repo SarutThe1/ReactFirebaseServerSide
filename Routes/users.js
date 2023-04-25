@@ -20,4 +20,6 @@ router.put('/users/:id',updateUser)
 router.delete('/users/:id',auth,adminCheck,removeUser)
 
 
+
+
 module.exports = router;

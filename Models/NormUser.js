@@ -32,17 +32,16 @@ const NuserSchema = mongoose.Schema({
     birthday:{
         type: Date,
     },
-    address:{
-        type: Array,
-    },
     role:{
         type: String,
         default:'user'
     },
     picture:{
         type: Array
-    }
-    
+    },
+    address:{
+        type:String
+    },
 
 },{timestamps:true})
 
